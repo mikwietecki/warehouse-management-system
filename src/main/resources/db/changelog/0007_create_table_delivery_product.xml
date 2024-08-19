@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0007-01" author="mwietecki">
+        <createTable tableName="delivery_product">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="delivery_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
+            <column name="quantity" type="INT"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="delivery_product"
+                                 baseColumnNames="delivery_id"
+                                 constraintName="fk_delivery_product_delivery_id"
+                                 referencedTableName="delivery"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="delivery_product"
+                                 baseColumnNames="product_id"
+                                 constraintName="fk_delivery_product_product_id"
+                                 referencedTableName="product"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
